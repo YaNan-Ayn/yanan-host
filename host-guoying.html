@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>郭莹 · 赢享先生</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #FAFAFA; --surface: #FFFFFF; --text: #1A1A1A;
+  --text-secondary: #666666; --text-tertiary: #999999;
+  --accent: #D4A843; --accent-dark: #B8912E;
+  --border: #EEEEEE; --shadow-card: 0 2px 12px rgba(0,0,0,0.06);
+  --radius-md: 12px;
+}
+html { font-size: 16px; -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  max-width: 480px; margin: 0 auto; min-height: 100dvh; padding-bottom: 100px;
+}
+.top-bar {
+  display: flex; align-items: center; padding: 12px 20px;
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 10;
+}
+.top-bar .back {
+  display: flex; align-items: center; gap: 4px; font-size: 0.88rem;
+  color: var(--text-secondary); text-decoration: none; flex-shrink: 0;
+}
+.top-bar .back svg { width: 18px; height: 18px; }
+.top-bar .title { flex: 1; text-align: center; font-size: 0.95rem; font-weight: 600; }
+.host-hero {
+  padding: 24px 20px; background: var(--surface);
+  display: flex; align-items: center; gap: 16px;
+}
+.host-avatar {
+  width: 80px; height: 80px; border-radius: 50%; background: #F0F0F0;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; color: var(--text-tertiary); overflow: hidden;
+}
+.host-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.host-meta h2 { font-size: 1.15rem; font-weight: 700; margin-bottom: 4px; }
+.host-meta .tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+.host-meta .tag {
+  font-size: 0.62rem; padding: 3px 8px; background: #F5F5F5;
+  color: #444; border-radius: 3px;
+}
+.host-meta .brief { font-size: 0.78rem; color: var(--text-secondary); }
+.tab-bar {
+  display: flex; background: var(--surface); border-bottom: 1px solid var(--border);
+  position: sticky; top: 50px; z-index: 9;
+}
+.tab-item {
+  flex: 1; text-align: center; padding: 14px 0; font-size: 0.85rem;
+  font-weight: 500; color: var(--text-secondary); cursor: pointer;
+  position: relative; transition: color 0.2s;
+}
+.tab-item.active { color: var(--text); font-weight: 600; }
+.tab-item.active::after {
+  content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 24px; height: 3px; background: var(--accent); border-radius: 2px;
+}
+.tab-content { display: none; padding: 20px; }
+.tab-content.active { display: block; }
+.info-block {
+  background: var(--surface); border-radius: var(--radius-md);
+  padding: 20px; margin-bottom: 14px; box-shadow: var(--shadow-card);
+}
+.info-block h3 {
+  font-size: 0.95rem; font-weight: 600; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.info-block h3 .dot {
+  width: 4px; height: 4px; border-radius: 50%; background: var(--accent); flex-shrink: 0;
+}
+.info-block p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.7; }
+.service-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.service-tag {
+  padding: 8px 14px; font-size: 0.78rem; background: #F8F8F8;
+  border-radius: 20px; color: var(--text); font-weight: 500;
+}
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.stat-item {
+  text-align: center; padding: 14px 8px; background: #F8F8F8;
+  border-radius: 10px;
+}
+.stat-item .val { font-size: 1.2rem; font-weight: 700; color: var(--accent-dark); }
+.stat-item .lbl { font-size: 0.65rem; color: var(--text-tertiary); margin-top: 4px; }
+.price-card {
+  text-align: center; padding: 24px 20px;
+  background: var(--surface); border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card); margin-bottom: 14px;
+}
+.price-card .amount {
+  font-size: 2rem; font-weight: 700; color: var(--accent-dark); margin-bottom: 8px;
+}
+.price-card .amount::before { content: '¥'; font-size: 1rem; }
+.price-card .note { font-size: 0.78rem; color: var(--text-secondary); }
+.contact-bar {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 480px; display: flex; gap: 10px;
+  padding: 12px 20px 28px; z-index: 50;
+  background: linear-gradient(180deg, rgba(250,250,250,0) 0%, rgba(250,250,250,0.95) 30%, #FAFAFA 50%);
+}
+.btn-primary {
+  flex: 3; display: flex; align-items: center; justify-content: center;
+  gap: 6px; padding: 14px; background: var(--text); color: #FFF;
+  font-size: 0.88rem; font-weight: 600; border-radius: 28px; text-decoration: none;
+}
+.btn-primary:active { background: #333; transform: scale(0.97); }
+.btn-secondary {
+  flex: 2; display: flex; align-items: center; justify-content: center;
+  padding: 14px; background: var(--surface); color: var(--text);
+  font-size: 0.82rem; font-weight: 500; border-radius: 28px;
+  border: 1px solid var(--border); text-decoration: none;
+}
+.btn-secondary:active { background: #F5F5F5; }
+.toast {
+  position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%) scale(0.9);
+  background: rgba(26,26,26,0.9); color: #FFF; padding: 12px 24px;
+  border-radius: 8px; font-size: 0.85rem; opacity: 0; pointer-events: none;
+  z-index: 100; transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.toast.show { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+.share-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 6px 14px; font-size: 0.72rem; color: var(--text-secondary);
+  border: 1px solid var(--border); border-radius: 20px;
+  background: var(--surface); cursor: pointer; margin-top: 8px; transition: all 0.2s;
+}
+.share-btn:active { background: #F5F5F5; }
+@media (max-width: 360px) {
+  .host-hero { padding: 18px 16px; gap: 12px; }
+  .tab-content { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a class="back" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+  </a>
+  <span class="title">郭莹</span>
+  <span style="width:40px"></span>
+</div>
+
+<div class="host-hero">
+  <div class="host-avatar">
+    <span>照片区</span>
+  </div>
+  <div class="host-meta">
+    <h2>郭莹</h2>
+    <div class="tags">
+      <span class="tag">中式</span>
+      <span class="tag">韩式</span>
+      <span class="tag">草坪</span>
+      <span class="tag">沉浸式</span>
+    </div>
+    <div class="brief">赢点联合创始人 · CMCA五星认证 · 金奖主持人</div>
+    <button class="share-btn" onclick="sharePage()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      分享
+    </button>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <div class="tab-item active" onclick="switchTab(0)">郭莹详情</div>
+  <div class="tab-item" onclick="switchTab(1)">服务价格</div>
+  <div class="tab-item" onclick="switchTab(2)">服务详情</div>
+</div>
+
+<!-- Tab 0: 郭莹详情 -->
+<div class="tab-content active" id="tab0">
+  <div class="info-block">
+    <h3><span class="dot"></span>关于郭莹</h3>
+    <p>中国·赢点主持团队联合创始人、队长，赢点婚礼培训机构校长。通过行业权威机构——中华司仪网 CMCA 认证，五星级优秀主持人、策划师。2014年"盛世齐鲁"杯中华司仪东部赛区金奖获得者。</p>
+  </div>
+  <div class="info-block">
+    <h3><span class="dot"></span>擅长风格</h3>
+    <div class="service-tags">
+      <span class="service-tag">轻松聊天式开场</span>
+      <span class="service-tag">韩式婚礼</span>
+      <span class="service-tag">草坪婚礼</span>
+      <span class="service-tag">沉浸式婚礼</span>
+      <span class="service-tag">网红达人风格</span>
+      <span class="service-tag">中式婚礼</span>
+      <span class="service-tag">讲述感风格</span>
+    </div>
+  </div>
+  <div class="info-block">
+    <h3><span class="dot"></span>数据一览</h3>
+    <div class="stat-grid">
+      <div class="stat-item"><div class="val">4337</div><div class="lbl">平台浏览量</div></div>
+      <div class="stat-item"><div class="val">8</div><div class="lbl">精选作品</div></div>
+      <div class="stat-item"><div class="val">27</div><div class="lbl">总获赞</div></div>
+    </div>
+  </div>
+  <div class="info-block">
+    <h3><span class="dot"></span>代表作品</h3>
+    <p>金玉满堂水晶厅的轻松聊天式开场<br>韩式婚礼样片<br>草坪婚礼样片<br>沉浸婚礼样片<br>网红达人婚礼开场<br>中式婚礼开场<br>讲述感婚礼开场</p>
+  </div>
+</div>
+
+<!-- Tab 1: 服务价格 -->
+<div class="tab-content" id="tab1">
+  <div class="price-card">
+    <div class="amount">1480</div>
+    <div class="note">起 · 含婚礼当天主持 + 前期沟通 + 彩排</div>
+  </div>
+  <div class="info-block">
+    <h3><span class="dot"></span>服务包含</h3>
+    <div class="service-tags">
+      <span class="service-tag">婚前沟通</span>
+      <span class="service-tag">流程策划</span>
+      <span class="service-tag">彩排指导</span>
+      <span class="service-tag">当天主持</span>
+      <span class="service-tag">音乐编排</span>
+      <span class="service-tag">应急处理</span>
+    </div>
+  </div>
+  <div class="info-block">
+    <h3><span class="dot"></span>档期查询</h3>
+    <p>7月：21日中午、24日中午、29日中午<br>8月：30日中午、31日中午<br>9月：2日、5日、12日、13日、21日、27日、28日中午<br>10月：1日、2日、3日、6日、7日、20日、22日、25日、28日中午<br>更多档期请电话咨询。</p>
+  </div>
+</div>
+
+<!-- Tab 2: 服务详情 -->
+<div class="tab-content" id="tab2">
+  <div class="info-block">
+    <h3><span class="dot"></span>主持风格</h3>
+    <p>郭莹老师擅长多种风格灵活切换——无论是轻松自然的聊天式开场、沉浸走心的讲述感风格，还是充满仪式感的中式传统婚礼，都能精准拿捏。韩式简约美学和草坪户外的自由浪漫也信手拈来。</p>
+  </div>
+  <div class="info-block">
+    <h3><span class="dot"></span>资质认证</h3>
+    <div class="service-tags">
+      <span class="service-tag">CMCA五星认证</span>
+      <span class="service-tag">CMCA认证策划师</span>
+      <span class="service-tag">东部赛区金奖</span>
+      <span class="service-tag">赢点培训校长</span>
+      <span class="service-tag">赢点联合创始人</span>
+    </div>
+  </div>
+  <div class="info-block">
+    <h3><span class="dot"></span>服务流程</h3>
+    <p><strong>婚前 3 个月：</strong>初次沟通，了解你们的故事与期望<br>
+    <strong>婚前 1 个月：</strong>确定流程框架，定制主持词<br>
+    <strong>婚前 1 周：</strong>现场勘查，完善细节<br>
+    <strong>婚礼前 1 天：</strong>全场彩排，确保万无一失<br>
+    <strong>婚礼当天：</strong>全程主持 + 临场协调 + 情绪引导</p>
+  </div>
+</div>
+
+<footer class="contact-bar">
+  <a class="btn-primary" href="javascript:void(0)" onclick="openWechat()">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    添加微信 13503910580
+  </a>
+  <a class="btn-secondary" href="tel:13503910580">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    电话
+  </a>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function switchTab(idx) {
+  document.querySelectorAll('.tab-item').forEach((el, i) => el.classList.toggle('active', i === idx));
+  document.querySelectorAll('.tab-content').forEach((el, i) => el.classList.toggle('active', i === idx));
+}
+function sharePage() {
+  const url = window.location.href;
+  if (navigator.share) {
+    navigator.share({ title: '主持人郭莹', url: url }).catch(() => copyLink(url));
+  } else {
+    copyLink(url);
+  }
+}
+function copyLink(url) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => showToast('链接已复制，可发送给好友'));
+  } else {
+    const input = document.createElement('input');
+    input.value = url; input.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(input); input.select();
+    try { document.execCommand('copy'); showToast('链接已复制，可发送给好友'); }
+    catch(e) { showToast('分享链接：' + url); }
+    document.body.removeChild(input);
+  }
+}
+let tt;
+function showToast(m) {
+  const t = document.getElementById('toast');
+  clearTimeout(tt); t.textContent = m; t.classList.add('show');
+  tt = setTimeout(() => t.classList.remove('show'), 1800);
+}
+function openWechat() {
+  const w = '13503910580';
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(w).then(() => showToast('微信号已复制：' + w));
+  } else {
+    const i = document.createElement('input');
+    i.value = w; i.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(i); i.select();
+    try { document.execCommand('copy'); showToast('微信号已复制：' + w); }
+    catch(e) { showToast('微信号：' + w); }
+    document.body.removeChild(i);
+  }
+  setTimeout(() => { window.location.href = 'weixin://'; }, 600);
+}
+</script>
+</body>
+</html>
