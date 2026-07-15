@@ -193,6 +193,11 @@ body {
   font-size: 1.6rem;
   margin-bottom: 10px;
 }
+.service-card .icon img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
 
 .service-card .name {
   font-size: 0.88rem;
@@ -516,24 +521,24 @@ body {
 <section class="service-section">
   <div class="section-label">服务类型</div>
   <div class="service-grid">
-    <a class="service-card" href="javascript:void(0)" onclick="showToast('中式婚礼详情')">
-      <div class="icon">🏮</div>
-      <div class="name">中式婚礼</div>
-      <div class="desc">传统仪典 · 大气庄重</div>
-    </a>
     <a class="service-card" href="javascript:void(0)" onclick="showToast('西式婚礼详情')">
-      <div class="icon">💒</div>
+      <div class="icon"><img src="images/icon-western.png" alt="西式婚礼"></div>
       <div class="name">西式婚礼</div>
       <div class="desc">浪漫唯美 · 真挚动人</div>
     </a>
+    <a class="service-card" href="javascript:void(0)" onclick="showToast('中式婚礼详情')">
+      <div class="icon"><img src="images/icon-chinese.png" alt="中式婚礼"></div>
+      <div class="name">中式婚礼</div>
+      <div class="desc">传统仪典 · 大气庄重</div>
+    </a>
     <a class="service-card" href="javascript:void(0)" onclick="showToast('商务活动详情')">
-      <div class="icon">🎤</div>
+      <div class="icon"><img src="images/icon-business.png" alt="商务活动"></div>
       <div class="name">商务活动</div>
       <div class="desc">年会 · 发布会 · 庆典</div>
     </a>
-    <a class="service-card" href="javascript:void(0)" onclick="showToast('督导管家详情')">
-      <div class="icon">🤵</div>
-      <div class="name">督导管家</div>
+    <a class="service-card" href="javascript:void(0)" onclick="showToast('婚礼管家详情')">
+      <div class="icon"><img src="images/icon-butler.png" alt="婚礼管家"></div>
+      <div class="name">婚礼管家</div>
       <div class="desc">全流程执行 · 无忧落地</div>
     </a>
     <div class="action-bar">
