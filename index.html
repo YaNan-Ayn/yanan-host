@@ -41,51 +41,6 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== Top Nav ===== */
-.top-nav {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 20px;
-  background: rgba(250,250,250,0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid transparent;
-}
-
-.top-nav.scrolled { border-bottom-color: var(--border); }
-
-.nav-brand {
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--text);
-}
-
-.nav-brand span {
-  color: var(--accent);
-  margin-left: 2px;
-}
-
-.nav-contact {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  text-decoration: none;
-  padding: 6px 14px;
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  transition: all 0.2s;
-}
-
-.nav-contact:active {
-  background: var(--text);
-  color: #FFF;
-  border-color: var(--text);
-}
-
 /* ===== Hero ===== */
 .hero {
   position: relative;
@@ -122,37 +77,51 @@ body {
   line-height: 1.5;
 }
 
-/* ===== Video Banner ===== */
-.video-section {
+/* ===== Carousel ===== */
+.carousel-section {
   padding: 0 20px 28px;
 }
-
-.video-wrapper {
+.carousel-wrap {
   position: relative;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: #1A1A1A;
-  aspect-ratio: 16/9;
+  aspect-ratio: 3/4;
+  background: #E8E8E8;
 }
-
-.video-placeholder {
+.carousel-track {
+  display: flex;
+  transition: transform 0.4s ease;
+  height: 100%;
+}
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+}
+.carousel-slide img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.carousel-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255,255,255,0.7);
-  cursor: pointer;
+  gap: 6px;
 }
-
-.video-placeholder svg {
-  margin-bottom: 8px;
+.carousel-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  transition: all 0.3s;
 }
-
-.video-placeholder span {
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
+.carousel-dots span.active {
+  background: #FFF;
+  width: 16px;
+  border-radius: 3px;
 }
 
 /* ===== Service Entrance ===== */
@@ -194,8 +163,8 @@ body {
   margin-bottom: 10px;
 }
 .service-card .icon img {
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
 }
 
@@ -459,7 +428,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 16px;
-  padding: 5px 0;
+  padding: 3px 0;
   margin: 8px 0 4px;
   background: rgba(255,255,255,0.88);
   border-radius: var(--radius-md);
@@ -468,8 +437,8 @@ body {
   -webkit-backdrop-filter: blur(8px);
 }
 .action-item {
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: #FFF;
   display: flex;
@@ -480,7 +449,7 @@ body {
   transition: transform 0.15s;
 }
 .action-item:active { transform: scale(0.92); }
-.action-item img { width: 24px; height: 24px; object-fit: contain; }
+.action-item img { width: 20px; height: 20px; object-fit: contain; }
 .action-item svg { width: 22px; height: 22px; }
 .action-item .label { display: none; }
 
@@ -494,12 +463,6 @@ body {
 </head>
 <body>
 
-<!-- Top Nav -->
-<nav class="top-nav" id="topNav">
-  <div class="nav-brand">赢享<span>先生</span></div>
-  <a class="nav-contact" href="javascript:void(0)" onclick="openWechat()">联系我们</a>
-</nav>
-
 <!-- Hero -->
 <section class="hero">
   <div class="hero-tag">PREMIUM WEDDING HOST</div>
@@ -507,12 +470,16 @@ body {
   <p class="slogan">赢享先生婚礼主持团队 · 管家式全流程服务</p>
 </section>
 
-<!-- Video -->
-<section class="video-section">
-  <div class="video-wrapper">
-    <div class="video-placeholder" onclick="showToast('视频即将上线')">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.8)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16" fill="rgba(255,255,255,0.8)"/></svg>
-      <span>宣传视频</span>
+<!-- Carousel -->
+<section class="carousel-section">
+  <div class="carousel-wrap">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide"><img src="images/yanan.jpg" alt="亚楠"></div>
+      <div class="carousel-slide"><img src="images/guoying.jpg" alt="郭莹"></div>
+    </div>
+    <div class="carousel-dots" id="carouselDots">
+      <span class="active"></span>
+      <span></span>
     </div>
   </div>
 </section>
@@ -637,10 +604,18 @@ body {
 <div class="toast" id="toast"></div>
 
 <script>
-// Nav scroll effect
-window.addEventListener('scroll', () => {
-  document.getElementById('topNav').classList.toggle('scrolled', window.scrollY > 10);
-});
+// Carousel
+(function(){
+  var t=document.getElementById('carouselTrack'),d=document.querySelectorAll('#carouselDots span'),
+      i=0,c=2,p;
+  function go(n){
+    i=n;t.style.transform='translateX(-'+i*100+'%)';
+    d.forEach(function(x,j){x.classList.toggle('active',j===i);});
+  }
+  function next(){go((i+1)%c);}
+  p=setInterval(next,3000);
+  d.forEach(function(x,j){x.addEventListener('click',function(){go(j);clearInterval(p);p=setInterval(next,3000);});});
+})();
 
 // Toast
 let toastTimer;
