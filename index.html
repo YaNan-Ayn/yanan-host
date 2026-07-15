@@ -686,14 +686,28 @@ function showLocation() {
 
 function sharePage() {
   const url = window.location.href;
+  const ua = navigator.userAgent.toLowerCase();
+  const isWechat = ua.indexOf('micromessenger') !== -1;
+
+  if (isWechat) {
+    showToast('请点击右上角 ··· 按钮，选择「发送给朋友」或「分享到朋友圈」');
+    return;
+  }
+
   if (navigator.share) {
-    navigator.share({ title: '赢享先生婚礼主持团队', url: url }).catch(() => {});
+    navigator.share({ title: '赢享先生婚礼主持团队', url: url }).catch(() => {
+      fallbackCopyUrl(url);
+    });
   } else {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(url).then(() => showToast('链接已复制，可转发给好友'));
-    } else {
-      fallbackCopy(url);
-    }
+    fallbackCopyUrl(url);
+  }
+}
+
+function fallbackCopyUrl(url) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => showToast('链接已复制，可发送给好友'));
+  } else {
+    fallbackCopy(url);
   }
 }
 </script>

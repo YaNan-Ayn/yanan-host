@@ -343,6 +343,14 @@ function switchTab(idx) {
 
 function sharePage() {
   const url = window.location.href;
+  const ua = navigator.userAgent.toLowerCase();
+  const isWechat = ua.indexOf('micromessenger') !== -1;
+
+  if (isWechat) {
+    showToast('请点击右上角 ··· 按钮，选择「发送给朋友」或「分享到朋友圈」');
+    return;
+  }
+
   if (navigator.share) {
     navigator.share({ title: '主持人亚楠', url: url }).catch(() => copyLink(url));
   } else {
