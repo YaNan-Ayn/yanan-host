@@ -88,6 +88,7 @@ body {
   overflow: hidden;
   aspect-ratio: 3/4;
   background: #E8E8E8;
+  touch-action: pan-y;
 }
 .carousel-track {
   display: flex;
@@ -619,7 +620,7 @@ body {
   d.forEach(function(x,j){x.addEventListener('click',function(){go(j);resetTimer();});});
   // Touch
   t.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;deltaX=0;moved=false;t.style.transition='none';});
-  t.addEventListener('touchmove',function(e){deltaX=e.touches[0].clientX-startX;t.style.transform='translateX(calc(-'+i*100+'% + '+deltaX+'px))';moved=true;});
+  t.addEventListener('touchmove',function(e){e.preventDefault();deltaX=e.touches[0].clientX-startX;t.style.transform='translateX(calc(-'+i*100+'% + '+deltaX+'px))';moved=true;},{passive:false});
   t.addEventListener('touchend',function(e){
     t.style.transition='transform 0.3s ease';
     if(!moved)return;
