@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>档期查询 · 赢享先生</title>
+<meta name="description" content="赢享先生婚礼主持团队档期查询——查看亚楠、郭莹等主持人的可预约日期。">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#FAFAFA; --surface:#FFF; --text:#1A1A1A;
+  --text-secondary:#666; --text-tertiary:#999;
+  --accent:#D4A843; --accent-dark:#B8912E;
+  --available:#4CAF50; --booked:#E53935;
+  --border:#EEE; --radius:12px;
+}
+html { font-size:16px; -webkit-font-smoothing:antialiased; }
+body {
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg); color:var(--text); max-width:480px; margin:0 auto;
+  min-height:100dvh; padding-bottom:40px;
+}
+
+.top-bar {
+  display:flex; align-items:center; padding:12px 20px;
+  background:var(--surface); border-bottom:1px solid var(--border);
+  position:sticky; top:0; z-index:10;
+}
+.top-bar .back {
+  display:flex; align-items:center; gap:4px; font-size:0.88rem;
+  color:var(--text-secondary); text-decoration:none;
+}
+.top-bar .back svg { width:18px; height:18px; }
+.top-bar .title { flex:1; text-align:center; font-size:0.95rem; font-weight:600; }
+
+.page-intro {
+  padding:20px 20px 12px;
+  text-align:center;
+}
+.page-intro h2 { font-size:1.1rem; font-weight:700; margin-bottom:6px; }
+.page-intro p { font-size:0.78rem; color:var(--text-tertiary); }
+
+.host-tabs {
+  display:flex; gap:8px; padding:0 20px 16px; overflow-x:auto;
+}
+.host-tab {
+  padding:8px 18px; border-radius:20px; font-size:0.82rem; font-weight:500;
+  border:1px solid var(--border); background:var(--surface); color:var(--text-secondary);
+  cursor:pointer; white-space:nowrap; transition:all 0.2s;
+}
+.host-tab.active {
+  background:var(--text); color:#FFF; border-color:var(--text);
+}
+
+.schedule-content { padding:0 20px; }
+
+.month-nav {
+  display:flex; align-items:center; justify-content:center; gap:16px;
+  margin-bottom:16px;
+}
+.month-nav .arrow {
+  width:32px; height:32px; border-radius:50%; border:1px solid var(--border);
+  background:var(--surface); display:flex; align-items:center; justify-content:center;
+  cursor:pointer; font-size:0.9rem; color:var(--text-secondary);
+}
+.month-nav .label { font-size:0.95rem; font-weight:600; min-width:80px; text-align:center; }
+
+.calendar { background:var(--surface); border-radius:var(--radius); padding:16px; box-shadow:0 2px 12px rgba(0,0,0,0.06); }
+.calendar .weekdays { display:grid; grid-template-columns:repeat(7,1fr); text-align:center; margin-bottom:8px; }
+.calendar .weekdays span { font-size:0.68rem; color:var(--text-tertiary); font-weight:500; padding:4px 0; }
+.calendar .days { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; }
+.calendar .day {
+  aspect-ratio:1; display:flex; align-items:center; justify-content:center;
+  font-size:0.82rem; border-radius:50%; cursor:default; position:relative;
+}
+.calendar .day.empty { cursor:default; }
+.calendar .day.today { font-weight:700; border:1.5px solid var(--accent); }
+.calendar .day.available { background:#E8F5E9; color:var(--available); cursor:pointer; }
+.calendar .day.booked { background:#FFEBEE; color:var(--booked); }
+.calendar .day.past { color:#CCC; }
+
+.legend {
+  display:flex; gap:20px; justify-content:center; margin-top:14px;
+  font-size:0.72rem; color:var(--text-secondary);
+}
+.legend span { display:flex; align-items:center; gap:5px; }
+.legend .dot { width:10px; height:10px; border-radius:50%; }
+.legend .dot.green { background:var(--available); }
+.legend .dot.red { background:var(--booked); }
+
+.tooltip {
+  position:fixed; bottom:20%; left:50%; transform:translateX(-50%);
+  background:rgba(26,26,26,0.9); color:#FFF; padding:10px 20px;
+  border-radius:8px; font-size:0.82rem; opacity:0; pointer-events:none;
+  z-index:100; transition:opacity 0.3s;
+}
+.tooltip.show { opacity:1; }
+
+.empty-state {
+  text-align:center; padding:40px 20px; color:var(--text-tertiary);
+}
+.empty-state .hint { font-size:0.85rem; margin-bottom:8px; }
+.empty-state .sub { font-size:0.72rem; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a class="back" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+  </a>
+  <span class="title">档期查询</span>
+  <span style="width:40px"></span>
+</div>
+
+<div class="page-intro">
+  <h2>查看主持人档期</h2>
+  <p>绿色 = 可预约 · 红色 = 已预定</p>
+</div>
+
+<div class="host-tabs" id="hostTabs"></div>
+
+<div class="schedule-content" id="scheduleContent">
+  <div class="empty-state">
+    <div class="hint">请选择上方主持人查看档期</div>
+  </div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+const SCHEDULE_DATA = [
+  {
+    name: "亚楠",
+    booked: [
+      "2026-07-21","2026-07-24","2026-07-29",
+      "2026-08-30","2026-08-31",
+      "2026-09-02","2026-09-05","2026-09-12","2026-09-13","2026-09-21","2026-09-27","2026-09-28",
+      "2026-10-01","2026-10-02","2026-10-03","2026-10-06","2026-10-07","2026-10-20","2026-10-22","2026-10-25","2026-10-28",
+      "2026-11-08","2026-11-15","2026-11-22"
+    ]
+  },
+  {
+    name: "郭莹",
+    booked: [
+      "2026-07-21","2026-07-24","2026-07-29",
+      "2026-08-30","2026-08-31",
+      "2026-09-02","2026-09-05","2026-09-12","2026-09-13","2026-09-21","2026-09-27","2026-09-28",
+      "2026-10-01","2026-10-02","2026-10-03","2026-10-06","2026-10-07","2026-10-20","2026-10-22","2026-10-25","2026-10-28"
+    ]
+  },
+  {
+    name: "待定",
+    booked: []
+  },
+  {
+    name: "待定",
+    booked: []
+  },
+  {
+    name: "待定",
+    booked: []
+  }
+];
+
+let currentHostIdx = -1;
+let currentYear = 2026;
+let currentMonth = 7;
+const today = new Date();
+const todayStr = today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+
+function renderHostTabs() {
+  const container = document.getElementById('hostTabs');
+  container.innerHTML = SCHEDULE_DATA.map((h, i) => 
+    `<div class="host-tab${i===currentHostIdx?' active':''}" onclick="selectHost(${i})">${h.name}</div>`
+  ).join('');
+}
+
+function selectHost(idx) {
+  currentHostIdx = idx;
+  renderHostTabs();
+  renderCalendar();
+}
+
+function changeMonth(delta) {
+  currentMonth += delta;
+  if (currentMonth > 12) { currentMonth = 1; currentYear++; }
+  if (currentMonth < 1) { currentMonth = 12; currentYear--; }
+  renderCalendar();
+}
+
+function renderCalendar() {
+  if (currentHostIdx < 0) return;
+  const host = SCHEDULE_DATA[currentHostIdx];
+  const booked = new Set(host.booked);
+  
+  const firstDay = new Date(currentYear, currentMonth-1, 1);
+  const lastDay = new Date(currentYear, currentMonth, 0);
+  const startDow = firstDay.getDay();
+  const totalDays = lastDay.getDate();
+  
+  const weekdays = ['日','一','二','三','四','五','六'];
+  
+  let daysHtml = '';
+  for (let i = 0; i < startDow; i++) {
+    daysHtml += '<div class="day empty"></div>';
+  }
+  for (let d = 1; d <= totalDays; d++) {
+    const dateStr = `${currentYear}-${String(currentMonth).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isPast = dateStr < todayStr;
+    const isBooked = booked.has(dateStr);
+    const isToday = dateStr === todayStr;
+    
+    let cls = 'day';
+    if (isToday) cls += ' today';
+    if (isPast) cls += ' past';
+    else if (isBooked) cls += ' booked';
+    else cls += ' available';
+    
+    const label = isBooked ? '已预定' : (isPast ? '' : '可预约');
+    daysHtml += `<div class="${cls}" onclick="${!isPast && !isBooked ? `showTip('${dateStr} 可预约')` : (isBooked ? `showTip('${dateStr} 已预定')` : '')}">${d}</div>`;
+  }
+  
+  document.getElementById('scheduleContent').innerHTML = `
+    <div class="month-nav">
+      <div class="arrow" onclick="changeMonth(-1)">‹</div>
+      <div class="label">${currentYear}年${currentMonth}月</div>
+      <div class="arrow" onclick="changeMonth(1)">›</div>
+    </div>
+    <div class="calendar">
+      <div class="weekdays">${weekdays.map(w => `<span>${w}</span>`).join('')}</div>
+      <div class="days">${daysHtml}</div>
+      <div class="legend">
+        <span><span class="dot green"></span>可预约</span>
+        <span><span class="dot red"></span>已预定</span>
+      </div>
+    </div>
+  `;
+}
+
+let tipTimer;
+function showTip(msg) {
+  const t = document.getElementById('tooltip');
+  clearTimeout(tipTimer);
+  t.textContent = msg; t.classList.add('show');
+  tipTimer = setTimeout(() => t.classList.remove('show'), 1200);
+}
+
+renderHostTabs();
+</script>
+</body>
+</html>
