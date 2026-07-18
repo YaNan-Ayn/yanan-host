@@ -514,14 +514,20 @@ body {
 .action-item img { width: 20px; height: 20px; object-fit: contain; }
 .action-item svg { width: 22px; height: 22px; }
 .action-item .label { display: none; }
-.action-schedule {
+.schedule-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 0;
+  margin-top: 8px;
   text-decoration: none;
-}
-.schedule-text {
-  font-size: 0.7rem;
-  font-weight: 600;
   color: #1A1A1A;
-  letter-spacing: 0.02em;
+}
+.schedule-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -592,10 +598,11 @@ body {
       <div class="action-item" onclick="sharePage()">
         <img src="images/icon-share.png" alt="转发">
       </div>
-      <a class="action-item action-schedule" href="schedule.html">
-        <span class="schedule-text">档期</span>
-      </a>
     </div>
+    <a class="action-bar schedule-bar" href="schedule.html">
+      <span class="schedule-label">档期查询</span>
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
   </div>
 </section>
 
