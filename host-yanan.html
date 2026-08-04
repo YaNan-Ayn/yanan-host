@@ -226,7 +226,7 @@ body {
 <!-- Video Works -->
 <div class="section-block">
   <div class="section-title">视频作品</div>
-  <a class="video-thumb" href="https://v.douyin.com/AlK4FtDZgUg/" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;">
+  <a class="video-thumb" id="videoLink" href="https://www.douyin.com/video/7667366478420757760" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;">
     <img src="images/yanan.jpg" alt="视频作品">
     <div class="video-play"></div>
     <div class="video-caption">点击播放 · 主持片段</div>
@@ -308,6 +308,14 @@ body {
 <div class="toast" id="toast"></div>
 
 <script>
+// Device-aware video link: phone→Douyin App, desktop→web
+(function(){
+  const ua=navigator.userAgent.toLowerCase();
+  const isMobile=/iphone|ipad|android|mobile/.test(ua);
+  const v=document.getElementById('videoLink');
+  if(v && isMobile) v.href='https://v.douyin.com/AlK4FtDZgUg/';
+})();
+
 let tt;
 function showToast(m) {
   const t = document.getElementById('toast');
