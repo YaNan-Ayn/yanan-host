@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>晓楠 · 赢享先生</title>
+<meta name="description" content="晓楠——赢享先生婚礼主持团队，播音系专业背景，温暖细腻嗓音，擅长营造温馨浪漫氛围。">
+<meta property="og:title" content="晓楠 · 赢享先生婚礼主持">
+<meta property="og:description" content="播音系专业背景，温暖细腻嗓音，让每场婚礼充满温度。">
+<meta property="og:image" content="https://yanan-ayn.github.io/yanan-host/images/xiaonan.jpg">
+<meta property="og:url" content="https://yanan-ayn.github.io/yanan-host/host-xiaonan.html">
+<meta property="og:type" content="profile">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg:#F5F5F5; --surface:#FFF; --text:#333;
+  --text-secondary:#666; --text-tertiary:#999;
+  --accent:#D4A843; --accent-dark:#B8912E;
+  --tag-bg:#E8F5E9; --tag-text:#2E7D32;
+  --border:#EEE; --radius:12px;
+}
+html { font-size:16px; -webkit-font-smoothing:antialiased; -webkit-tap-highlight-color:transparent; }
+body {
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg); color:var(--text); line-height:1.5;
+  max-width:480px; margin:0 auto; min-height:100dvh; padding-bottom:80px;
+}
+
+/* Top Bar */
+.top-bar {
+  display:flex; align-items:center; padding:0 16px;
+  height:48px; background:#1A1A1A; position:sticky; top:0; z-index:20;
+}
+.top-bar .back {
+  display:flex; align-items:center; justify-content:center;
+  width:32px; height:32px; flex-shrink:0;
+}
+.top-bar .back svg { width:20px; height:20px; stroke:#FFF; }
+.top-bar .title {
+  flex:1; text-align:center; font-size:0.9rem; color:#FFF;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  padding:0 8px;
+}
+.top-bar .badge {
+  width:28px; height:28px; border-radius:50%; background:#555;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.top-bar .badge span { font-size:0.6rem; color:#FFF; font-weight:600; }
+
+/* Hero */
+.hero-img {
+  width:100%; aspect-ratio:16/9; object-fit:cover; display:block;
+  background:#E0E0E0;
+}
+
+/* Info */
+.info-section {
+  background:var(--surface); padding:16px 20px;
+}
+.info-row1 {
+  display:flex; align-items:center; gap:8px; margin-bottom:8px;
+}
+.info-name { font-size:1.2rem; font-weight:700; color:var(--text); }
+.info-tag {
+  font-size:0.65rem; padding:2px 8px; background:var(--tag-bg);
+  color:var(--tag-text); border-radius:4px; font-weight:500;
+}
+.info-location { font-size:0.75rem; color:var(--text-tertiary); }
+.info-bio { font-size:0.88rem; color:var(--text-secondary); }
+
+/* Stats */
+.stats-card {
+  margin:12px 20px; background:var(--surface); border-radius:var(--radius);
+  padding:16px 0; display:flex;
+}
+.stat-item {
+  flex:1; text-align:center; border-right:1px solid var(--border);
+}
+.stat-item:last-child { border-right:none; }
+.stat-label { font-size:0.7rem; color:var(--text-tertiary); margin-bottom:4px; }
+.stat-value { font-size:1.1rem; font-weight:700; color:var(--text); }
+.stat-unit { font-size:0.7rem; color:var(--text-tertiary); font-weight:400; }
+
+/* Section */
+.section-block {
+  margin:12px 20px; background:var(--surface); border-radius:var(--radius);
+  padding:16px; overflow:hidden;
+}
+.section-title {
+  font-size:1rem; font-weight:700; color:var(--text);
+  margin-bottom:12px; display:flex; align-items:center; gap:6px;
+}
+.section-title::before {
+  content:''; width:3px; height:16px; background:var(--accent);
+  border-radius:2px; display:block;
+}
+
+/* Video */
+.video-thumb {
+  position:relative; width:100%; aspect-ratio:16/9;
+  background:#E8E8E8; border-radius:8px; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.video-thumb img {
+  width:100%; height:100%; object-fit:cover;
+}
+.video-play {
+  position:absolute; width:48px; height:48px; border-radius:50%;
+  background:rgba(0,0,0,0.5); display:flex; align-items:center;
+  justify-content:center;
+}
+.video-play::after {
+  content:''; border-style:solid; border-width:10px 0 10px 17px;
+  border-color:transparent transparent transparent #FFF;
+  margin-left:3px;
+}
+.video-caption {
+  position:absolute; bottom:0; left:0; right:0; padding:8px 12px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.5));
+  color:#FFF; font-size:0.75rem; text-align:center;
+}
+
+/* Detail Image */
+.detail-img {
+  width:100%; aspect-ratio:16/9; object-fit:cover;
+  border-radius:8px; background:#E8E8E8; display:block;
+}
+
+/* Schedule */
+.schedule-row {
+  display:flex; gap:10px; margin-bottom:10px;
+}
+.schedule-month {
+  flex-shrink:0; width:40px; height:40px; background:#E53935;
+  color:#FFF; border-radius:6px; display:flex; align-items:center;
+  justify-content:center; font-size:0.7rem; font-weight:600;
+}
+.schedule-dates {
+  flex:1; display:flex; flex-wrap:wrap; gap:6px; align-items:center;
+}
+.schedule-date {
+  padding:4px 10px; background:#F5F5F5; border-radius:4px;
+  font-size:0.72rem; color:var(--text-secondary);
+}
+.schedule-date span { color:var(--text-tertiary); font-size:0.65rem; }
+
+/* Reviews */
+.review-empty {
+  text-align:center; padding:20px 0; color:var(--text-tertiary);
+  font-size:0.82rem;
+}
+
+/* Bottom Bar */
+.bottom-bar {
+  position:fixed; bottom:0; left:50%; transform:translateX(-50%);
+  width:100%; max-width:480px; display:flex; gap:10px;
+  padding:12px 20px 28px; z-index:50;
+  background:linear-gradient(180deg,rgba(245,245,245,0) 0%,rgba(245,245,245,0.95) 30%,var(--bg) 50%);
+}
+.btn-book {
+  flex:3; display:flex; align-items:center; justify-content:center;
+  padding:14px; background:var(--accent); color:#FFF;
+  font-size:0.9rem; font-weight:600; border-radius:28px;
+  text-decoration:none; letter-spacing:0.03em; transition:all 0.2s;
+}
+.btn-book:active { background:var(--accent-dark); transform:scale(0.97); }
+.btn-share {
+  flex:1; display:flex; align-items:center; justify-content:center;
+  padding:14px; background:var(--surface); color:var(--text);
+  font-size:0.82rem; font-weight:500; border-radius:28px;
+  border:1px solid var(--border); text-decoration:none;
+}
+.btn-share:active { background:#F5F5F5; }
+
+/* Toast */
+.toast {
+  position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.9);
+  background:rgba(26,26,26,0.9); color:#FFF; padding:12px 24px;
+  border-radius:8px; font-size:0.85rem; opacity:0; pointer-events:none;
+  z-index:100; transition:all 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+.toast.show { opacity:1; transform:translate(-50%,-50%) scale(1); }
+</style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar">
+  <a class="back" href="index.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+  </a>
+  <span class="title">晓楠 - 播音系 - 温暖细腻嗓音</span>
+  <div class="badge"><span>新</span></div>
+</div>
+
+<!-- Hero Image -->
+<img class="hero-img" src="images/xiaonan.jpg" alt="主持人晓楠">
+
+<!-- Info -->
+<div class="info-section">
+  <div class="info-row1">
+    <span class="info-name">晓楠</span>
+    <span class="info-tag">播音系专业</span>
+    <span class="info-location">黑龙江 · 哈尔滨</span>
+  </div>
+  <div class="info-bio">行停且高歌，枕尽人间好山河。播音系出身，用声音讲述新人的爱情故事。</div>
+</div>
+
+<!-- Stats -->
+<div class="stats-card">
+  <div class="stat-item">
+    <div class="stat-label">婚礼</div>
+    <div class="stat-value">300<span class="stat-unit">场+</span></div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-label">从业</div>
+    <div class="stat-value">7<span class="stat-unit">年+</span></div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-label">风格</div>
+    <div class="stat-value">温暖<span class="stat-unit">细腻</span></div>
+  </div>
+</div>
+
+<!-- Video Works -->
+<div class="section-block">
+  <div class="section-title">视频作品</div>
+  <a class="video-thumb" href="https://www.ihunyu.com/appweb/sharePlayVideoLocal.do?shareId=9ed17995-b9ce-40b3-968a-3554f744f384" target="_blank" rel="noopener noreferrer" style="display:block;text-decoration:none;">
+    <img src="images/xiaonan.jpg" alt="视频作品">
+    <div class="video-play"></div>
+    <div class="video-caption">点击播放 · 主持现场</div>
+  </a>
+</div>
+
+<!-- Detail -->
+<div class="section-block">
+  <div class="section-title">详细介绍</div>
+  <img class="detail-img" src="images/xiaonan.jpg" alt="主持现场">
+</div>
+
+<!-- Schedule -->
+<div class="section-block">
+  <div class="section-title">已定档期</div>
+  <div class="schedule-row">
+    <div class="schedule-month">07月</div>
+    <div class="schedule-dates">
+      <div class="schedule-date">02日<span> 中午</span></div>
+      <div class="schedule-date">05日<span> 中午</span></div>
+      <div class="schedule-date">18日<span> 中午</span></div>
+      <div class="schedule-date">23日<span> 中午</span></div>
+      <div class="schedule-date">29日<span> 中午</span></div>
+    </div>
+  </div>
+  <div class="schedule-row">
+    <div class="schedule-month">08月</div>
+    <div class="schedule-dates">
+      <div class="schedule-date">02日<span> 中午</span></div>
+      <div class="schedule-date">08日<span> 中午</span></div>
+      <div class="schedule-date">09日<span> 中午</span></div>
+      <div class="schedule-date">10日<span> 中午</span></div>
+      <div class="schedule-date">12日<span> 中午</span></div>
+      <div class="schedule-date">16日<span> 中午</span></div>
+      <div class="schedule-date">18日<span> 中午</span></div>
+      <div class="schedule-date">22日<span> 中午</span></div>
+      <div class="schedule-date">23日<span> 中午</span></div>
+    </div>
+  </div>
+  <div class="schedule-row">
+    <div class="schedule-month">09月</div>
+    <div class="schedule-dates">
+      <div class="schedule-date">03日<span> 中午</span></div>
+      <div class="schedule-date">05日<span> 中午</span></div>
+      <div class="schedule-date">06日<span> 中午</span></div>
+      <div class="schedule-date">12日<span> 中午</span></div>
+      <div class="schedule-date">16日<span> 上午</span></div>
+      <div class="schedule-date">19日<span> 中午</span></div>
+      <div class="schedule-date">20日<span> 中午</span></div>
+      <div class="schedule-date">21日<span> 中午</span></div>
+      <div class="schedule-date">26日<span> 中午</span></div>
+      <div class="schedule-date">28日<span> 中午</span></div>
+    </div>
+  </div>
+  <div class="schedule-row">
+    <div class="schedule-month">10月</div>
+    <div class="schedule-dates">
+      <div class="schedule-date">02日<span> 中午</span></div>
+      <div class="schedule-date">03日<span> 中午</span></div>
+      <div class="schedule-date">04日<span> 中午</span></div>
+      <div class="schedule-date">06日<span> 中午</span></div>
+      <div class="schedule-date">08日<span> 中午</span></div>
+      <div class="schedule-date">11日<span> 中午</span></div>
+      <div class="schedule-date">13日<span> 中午</span></div>
+      <div class="schedule-date">25日<span> 中午</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Reviews -->
+<div class="section-block">
+  <div class="section-title">真实评价</div>
+  <div class="review-empty">暂无评价，期待您的反馈</div>
+</div>
+
+<!-- Bottom Bar -->
+<div class="bottom-bar">
+  <a class="btn-book" href="tel:13836007116">立即预约</a>
+  <a class="btn-share" href="javascript:void(0)" onclick="sharePage()">分享</a>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let tt;
+function showToast(m) {
+  const t = document.getElementById('toast');
+  clearTimeout(tt); t.textContent = m; t.classList.add('show');
+  tt = setTimeout(() => t.classList.remove('show'), 1800);
+}
+function sharePage() {
+  const url = window.location.href;
+  const ua = navigator.userAgent.toLowerCase();
+  const isWechat = ua.indexOf('micromessenger') !== -1;
+  if (isWechat) {
+    showToast('请点击右上角 ··· 按钮，选择「发送给朋友」或「分享到朋友圈」');
+    return;
+  }
+  if (navigator.share) {
+    navigator.share({ title: '主持人晓楠', url: url }).catch(() => copyLink(url));
+  } else {
+    copyLink(url);
+  }
+}
+function copyLink(url) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => showToast('链接已复制，可发送给好友'));
+  } else {
+    const i = document.createElement('input');
+    i.value = url; i.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(i); i.select();
+    try { document.execCommand('copy'); showToast('链接已复制，可发送给好友'); }
+    catch(e) { showToast('分享链接：' + url); }
+    document.body.removeChild(i);
+  }
+}
+</script>
+</body>
+</html>
