@@ -84,54 +84,8 @@ body {
   line-height: 1.5;
 }
 
-/* ===== Carousel ===== */
-.carousel-section {
-  padding: 0;
-  margin-bottom: 28px;
-}
-.carousel-wrap {
-  position: relative;
-  border-radius: 0;
-  overflow: hidden;
-  aspect-ratio: 3/4;
-  background: #E8E8E8;
-  touch-action: pan-y;
-}
-.carousel-track {
-  display: flex;
-  transition: transform 0.4s ease;
-  height: 100%;
-}
-.carousel-slide {
-  min-width: 100%;
-  height: 100%;
-}
-.carousel-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.carousel-dots {
-  position: absolute;
-  bottom: 12px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 6px;
-}
-.carousel-dots span {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.5);
-  transition: all 0.3s;
-}
-.carousel-dots span.active {
-  background: #FFF;
-  width: 16px;
-  border-radius: 3px;
-}
+/* ===== Banner ===== */
+.banner-img { width:100%; display:block; }
 
 /* ===== Service Entrance ===== */
 .service-section {
@@ -312,44 +266,6 @@ body {
   font-size: 0.7rem;
 }
 
-/* ===== Portfolio ===== */
-.portfolio-section {
-  padding: 0 20px 28px;
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 4px;
-}
-
-.portfolio-item {
-  aspect-ratio: 1;
-  background: #F0F0F0;
-  border-radius: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-tertiary);
-  font-size: 0.68rem;
-  overflow: hidden;
-}
-
-.portfolio-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.portfolio-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-tertiary);
-  font-size: 0.68rem;
-}
-
 /* ===== Contact ===== */
 .contact-section {
   padding: 0 20px 40px;
@@ -507,20 +423,6 @@ body {
 .action-item img { width: 20px; height: 20px; object-fit: contain; }
 .action-item svg { width: 22px; height: 22px; }
 .action-item .label { display: none; }
-.schedule-bar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  text-decoration: none;
-  color: #1A1A1A;
-  min-height: 46px;
-}
-.schedule-label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -532,23 +434,8 @@ body {
 </head>
 <body>
 
-<!-- Carousel -->
-<section class="carousel-section">
-  <div class="carousel-wrap">
-    <div class="carousel-track" id="carouselTrack">
-      <div class="carousel-slide"><img src="images/yanan.jpg" alt="主持人亚楠"></div>
-      <div class="carousel-slide"><img src="images/guoying.jpg" alt="主持人郭莹"></div>
-      <div class="carousel-slide"><img src="images/xiaonan.jpg" alt="主持人晓楠"></div>
-      <div class="carousel-slide"><img src="images/wentao.jpg" alt="主持人文韬"></div>
-    </div>
-    <div class="carousel-dots" id="carouselDots">
-      <span class="active"></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-</section>
+<!-- Banner -->
+<img class="banner-img" src="images/yanan.jpg" alt="赢享先生婚礼主持团队">
 
 <!-- Hero -->
 <section class="hero">
@@ -595,10 +482,6 @@ body {
         <img src="images/icon-share.png" alt="转发">
       </div>
     </div>
-    <a class="action-bar schedule-bar" href="schedule.html">
-      <span class="schedule-label">档期查询</span>
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-    </a>
   </div>
 </section>
 
@@ -680,31 +563,6 @@ body {
   </div>
 </section>
 
-<!-- Portfolio -->
-<section class="portfolio-section">
-  <div class="section-label">作品精选</div>
-  <div class="portfolio-grid">
-    <div class="portfolio-item">
-      <div class="portfolio-placeholder">作品1</div>
-    </div>
-    <div class="portfolio-item">
-      <div class="portfolio-placeholder">作品2</div>
-    </div>
-    <div class="portfolio-item">
-      <div class="portfolio-placeholder">作品3</div>
-    </div>
-    <div class="portfolio-item">
-      <div class="portfolio-placeholder">作品4</div>
-    </div>
-    <div class="portfolio-item">
-      <div class="portfolio-placeholder">作品5</div>
-    </div>
-    <div class="portfolio-item">
-      <div class="portfolio-placeholder">作品6</div>
-    </div>
-  </div>
-</section>
-
 <!-- Contact -->
 <section class="contact-section">
   <div class="section-label">联系我们</div>
@@ -728,35 +586,6 @@ body {
 <div class="toast" id="toast"></div>
 
 <script>
-// Carousel
-(function(){
-  var t=document.getElementById('carouselTrack'),d=document.querySelectorAll('#carouselDots span'),
-      i=0,c=4,p,startX=0,deltaX=0,moved=false;
-  function go(n){
-    i=n;t.style.transition='transform 0.4s ease';t.style.transform='translateX(-'+i*100+'%)';
-    d.forEach(function(x,j){x.classList.toggle('active',j===i);});
-  }
-  function next(){go((i+1)%c);}
-  function resetTimer(){clearInterval(p);p=setInterval(next,3000);}
-  window.__carouselGo=go;window.__carouselReset=resetTimer;
-  p=setInterval(next,3000);
-  d.forEach(function(x,j){x.addEventListener('click',function(){go(j);resetTimer();});});
-  // Touch
-  t.addEventListener('touchstart',function(e){startX=e.touches[0].clientX;deltaX=0;moved=false;t.style.transition='none';});
-  t.addEventListener('touchmove',function(e){e.preventDefault();deltaX=e.touches[0].clientX-startX;t.style.transform='translateX(calc(-'+i*100+'% + '+deltaX+'px))';moved=true;},{passive:false});
-  t.addEventListener('touchend',function(e){
-    t.style.transition='transform 0.3s ease';
-    if(!moved)return;
-    if(deltaX>40){go((i-1+c)%c);}else if(deltaX<-40){go((i+1)%c);}else{go(i);}
-    resetTimer();
-  });
-})();
-
-// bfcache 修复：从详情页返回时重置轮播，避免卡片渲染异常
-window.addEventListener('pageshow',function(e){
-  if(e.persisted){window.__carouselGo(0);window.__carouselReset();}
-});
-
 // Toast
 let toastTimer;
 function showToast(msg) {
