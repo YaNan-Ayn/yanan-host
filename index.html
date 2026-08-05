@@ -745,6 +745,7 @@ body {
   }
   function next(){go((i+1)%c);}
   function resetTimer(){clearInterval(p);p=setInterval(next,3000);}
+  window.__carouselGo=go;window.__carouselReset=resetTimer;
   p=setInterval(next,3000);
   d.forEach(function(x,j){x.addEventListener('click',function(){go(j);resetTimer();});});
   // Touch
@@ -757,6 +758,11 @@ body {
     resetTimer();
   });
 })();
+
+// bfcache 修复：从详情页返回时重置轮播，避免卡片渲染异常
+window.addEventListener('pageshow',function(e){
+  if(e.persisted){window.__carouselGo(0);window.__carouselReset();}
+});
 
 // Toast
 let toastTimer;
