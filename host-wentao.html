@@ -197,10 +197,10 @@ body {
 <!-- Video Works -->
 <div class="section-block">
   <div class="section-title">视频作品</div>
-  <iframe src="https://www.ihunyu.com/appweb/sharePlayVideoLocal.do?shareId=89f886b7-6d9e-449b-b3af-817dac358a04" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe>
-  <iframe src="https://www.ihunyu.com/appweb/sharePlayVideoLocal.do?shareId=03fb9222-c85f-4941-9bfe-9372d68562c5" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe>
-  <iframe src="https://www.ihunyu.com/appweb/sharePlayVideoLocal.do?shareId=074cde9f-bfa9-4e87-8b80-9feff40fe3ea" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe>
-  <iframe src="https://www.ihunyu.com/appweb/sharePlayVideoLocal.do?shareId=1a05b215-38f3-4d2c-b35b-a1359255af70" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe>
+  <div style="position:relative;cursor:pointer;margin-bottom:12px;" onclick="stopOtherVideos(this)"><iframe src="https://www.ihunyu.com/appweb/sharePlayVideoLocal.do?shareId=89f886b7-6d9e-449b-b3af-817dac358a04" frameborder="0" allow="fullscreen" allowfullscreen class="video-frame" style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe></div>
+  <div style="position:relative;cursor:pointer;margin-bottom:12px;" onclick="stopOtherVideos(this)"><iframe src="https://www.ihunyu.com/appweb/sharePlayVideoLocal.do?shareId=03fb9222-c85f-4941-9bfe-9372d68562c5" frameborder="0" allow="fullscreen" allowfullscreen class="video-frame" style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe></div>
+  <div style="position:relative;cursor:pointer;margin-bottom:12px;" onclick="stopOtherVideos(this)"><iframe src="https://www.ihunyu.com/appweb/sharePlayVideoLocal.do?shareId=074cde9f-bfa9-4e87-8b80-9feff40fe3ea" frameborder="0" allow="fullscreen" allowfullscreen class="video-frame" style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe></div>
+  <div style="position:relative;cursor:pointer;" onclick="stopOtherVideos(this)"><iframe src="https://www.ihunyu.com/appweb/sharePlayVideoLocal.do?shareId=1a05b215-38f3-4d2c-b35b-a1359255af70" frameborder="0" allow="fullscreen" allowfullscreen class="video-frame" style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe></div>
 </div>
 
 <!-- Detail -->
@@ -248,6 +248,19 @@ function copyLink(url) {
     try { document.execCommand('copy'); showToast('链接已复制，可发送给好友'); }
     catch(e) { showToast('分享链接：' + url); }
     document.body.removeChild(i);
+  }
+}
+function stopOtherVideos(el) {
+  var cur = el.querySelector('.video-frame');
+  var frames = document.querySelectorAll('.video-frame');
+  for (var i = 0; i < frames.length; i++) {
+    (function(f) {
+      if (f !== cur) {
+        var src = f.src;
+        f.removeAttribute('src');
+        setTimeout(function() { f.src = src; }, 50);
+      }
+    })(frames[i]);
   }
 }
 </script>

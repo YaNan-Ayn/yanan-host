@@ -223,9 +223,9 @@ body {
 <!-- Video Works -->
 <div class="section-block">
   <div class="section-title">视频作品</div>
-  <iframe src="https://player.youku.com/embed/XNjU1NTY0ODgzNg==" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;margin-bottom:12px;"></iframe>
-  <iframe src="https://player.youku.com/embed/XNjU1NTY0NzM3Mg==" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;margin-bottom:12px;"></iframe>
-  <iframe src="https://player.youku.com/embed/XNjU0NjU4MjcwMA==" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe>
+  <div style="position:relative;cursor:pointer;margin-bottom:12px;" onclick="stopOtherVideos(this)"><iframe src="https://player.youku.com/embed/XNjU1NTY0ODgzNg==" frameborder="0" allow="fullscreen" allowfullscreen class="video-frame" style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe></div>
+  <div style="position:relative;cursor:pointer;margin-bottom:12px;" onclick="stopOtherVideos(this)"><iframe src="https://player.youku.com/embed/XNjU1NTY0NzM3Mg==" frameborder="0" allow="fullscreen" allowfullscreen class="video-frame" style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe></div>
+  <div style="position:relative;cursor:pointer;" onclick="stopOtherVideos(this)"><iframe src="https://player.youku.com/embed/XNjU0NjU4MjcwMA==" frameborder="0" allow="fullscreen" allowfullscreen class="video-frame" style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe></div>
 </div>
 
 <!-- Detail -->
@@ -275,6 +275,19 @@ function copyLink(url) {
     try { document.execCommand('copy'); showToast('链接已复制，可发送给好友'); }
     catch(e) { showToast('分享链接：' + url); }
     document.body.removeChild(i);
+  }
+}
+function stopOtherVideos(el) {
+  var cur = el.querySelector('.video-frame');
+  var frames = document.querySelectorAll('.video-frame');
+  for (var i = 0; i < frames.length; i++) {
+    (function(f) {
+      if (f !== cur) {
+        var src = f.src;
+        f.removeAttribute('src');
+        setTimeout(function() { f.src = src; }, 50);
+      }
+    })(frames[i]);
   }
 }
 </script>
