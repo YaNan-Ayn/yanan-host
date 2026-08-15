@@ -121,6 +121,39 @@ body {
   color:#FFF; font-size:0.75rem; text-align:center;
 }
 
+
+/* Douyin Cards */
+.douyin-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:10px;
+}
+.douyin-card {
+  position:relative; display:block; border-radius:8px;
+  overflow:hidden; text-decoration:none; background:#2A2A2A;
+  aspect-ratio:3/4;
+}
+.douyin-card .douyin-cover {
+  position:absolute; inset:0;
+  background:linear-gradient(160deg,#3A3A3A 0%,#1C1C1C 100%);
+  display:flex; align-items:center; justify-content:center;
+}
+.douyin-card .douyin-play {
+  width:46px; height:46px; border-radius:50%;
+  background:rgba(255,255,255,0.92);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 2px 8px rgba(0,0,0,0.3);
+}
+.douyin-card .douyin-play::after {
+  content:''; border-style:solid; border-width:8px 0 8px 14px;
+  border-color:transparent transparent transparent #111;
+  margin-left:3px;
+}
+.douyin-card .douyin-label {
+  position:absolute; left:8px; right:8px; bottom:8px;
+  font-size:0.68rem; color:#FFF; text-align:center;
+  background:rgba(0,0,0,0.5); border-radius:6px;
+  padding:4px 6px; letter-spacing:0.02em;
+}
+
 /* Detail Image */
 .detail-img {
   width:100%; aspect-ratio:16/9; object-fit:cover;
@@ -226,11 +259,30 @@ body {
 <!-- Video Works -->
 <div class="section-block">
   <div class="section-title">视频作品</div>
-  <div style="position:relative;cursor:pointer;margin-bottom:12px;" onclick="stopOtherVideos(this)"><iframe src="https://www.ihunyu.com/appweb/sharePlayVideoYouKu.do?shareId=85dae65e-dace-49f0-916f-133d42be0089" frameborder="0" allow="fullscreen" allowfullscreen class="video-frame" style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe></div>
-  <div style="position:relative;cursor:pointer;margin-bottom:12px;" onclick="stopOtherVideos(this)"><iframe src="https://www.ihunyu.com/appweb/sharePlayVideoYouKu.do?shareId=4fafda67-d7b7-4420-9a60-db91ed0ad319" frameborder="0" allow="fullscreen" allowfullscreen class="video-frame" style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe></div>
-  <div style="position:relative;cursor:pointer;margin-bottom:12px;" onclick="stopOtherVideos(this)"><iframe src="https://www.ihunyu.com/appweb/sharePlayVideoYouKu.do?shareId=9b514d6c-dac6-4041-a03e-2ac85a4be3f5" frameborder="0" allow="fullscreen" allowfullscreen class="video-frame" style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe></div>
-  <div style="position:relative;cursor:pointer;" onclick="stopOtherVideos(this)"><iframe src="https://www.ihunyu.com/appweb/sharePlayVideoYouKu.do?shareId=baa35fbd-5b19-4b8a-a567-eee821d343f2" frameborder="0" allow="fullscreen" allowfullscreen class="video-frame" style="width:100%;aspect-ratio:16/9;border-radius:8px;display:block;"></iframe></div>
+  <div class="douyin-grid">
+    <a class="douyin-card" href="https://v.douyin.com/7e-q-6eYjC0/" target="_blank" rel="noopener">
+      <div class="douyin-cover"><div class="douyin-play"></div></div>
+      <span class="douyin-label">抖音作品 1</span>
+    </a>
+    <a class="douyin-card" href="https://v.douyin.com/nDQCa4QmRa8/" target="_blank" rel="noopener">
+      <div class="douyin-cover"><div class="douyin-play"></div></div>
+      <span class="douyin-label">抖音作品 2</span>
+    </a>
+    <a class="douyin-card" href="https://v.douyin.com/Sy_ZcDAdOYc/" target="_blank" rel="noopener">
+      <div class="douyin-cover"><div class="douyin-play"></div></div>
+      <span class="douyin-label">抖音作品 3</span>
+    </a>
+    <a class="douyin-card" href="https://v.douyin.com/NIcZQj61TZ8/" target="_blank" rel="noopener">
+      <div class="douyin-cover"><div class="douyin-play"></div></div>
+      <span class="douyin-label">抖音作品 4</span>
+    </a>
+    <a class="douyin-card" href="https://v.douyin.com/z609Aqj0iXs/" target="_blank" rel="noopener">
+      <div class="douyin-cover"><div class="douyin-play"></div></div>
+      <span class="douyin-label">抖音作品 5</span>
+    </a>
+  </div>
 </div>
+
 
 <!-- Detail -->
 <div class="section-block">
@@ -281,19 +333,7 @@ function copyLink(url) {
     document.body.removeChild(i);
   }
 }
-function stopOtherVideos(el) {
-  var cur = el.querySelector('.video-frame');
-  var frames = document.querySelectorAll('.video-frame');
-  for (var i = 0; i < frames.length; i++) {
-    (function(f) {
-      if (f !== cur) {
-        var src = f.src;
-        f.removeAttribute('src');
-        setTimeout(function() { f.src = src; }, 50);
-      }
-    })(frames[i]);
-  }
-}
+
 </script>
 </body>
 </html>
