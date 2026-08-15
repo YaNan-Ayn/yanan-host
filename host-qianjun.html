@@ -119,34 +119,29 @@ body {
 
 /* Douyin Cards */
 .douyin-grid {
-  display:grid; grid-template-columns:1fr 1fr; gap:10px;
+  display:grid; grid-template-columns:1fr; gap:12px;
+}
+@media (min-width: 480px) {
+  .douyin-grid { grid-template-columns:1fr 1fr; }
 }
 .douyin-card {
-  position:relative; display:block; border-radius:8px;
-  overflow:hidden; text-decoration:none; background:#2A2A2A;
-  aspect-ratio:3/4;
+  position:relative; display:block; width:100%;
+  aspect-ratio:16/9; border-radius:8px; overflow:hidden;
+  text-decoration:none; background:#2A2A2A;
 }
-.douyin-card .douyin-cover {
-  position:absolute; inset:0;
-  background:linear-gradient(160deg,#3A3A3A 0%,#1C1C1C 100%);
-  display:flex; align-items:center; justify-content:center;
+.douyin-card img {
+  width:100%; height:100%; object-fit:cover; display:block;
 }
 .douyin-card .douyin-play {
-  width:46px; height:46px; border-radius:50%;
-  background:rgba(255,255,255,0.92);
-  display:flex; align-items:center; justify-content:center;
-  box-shadow:0 2px 8px rgba(0,0,0,0.3);
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+  width:48px; height:48px; border-radius:50%;
+  background:rgba(0,0,0,0.45); display:flex; align-items:center;
+  justify-content:center; pointer-events:none;
 }
 .douyin-card .douyin-play::after {
-  content:''; border-style:solid; border-width:8px 0 8px 14px;
-  border-color:transparent transparent transparent #111;
+  content:''; border-style:solid; border-width:9px 0 9px 15px;
+  border-color:transparent transparent transparent #FFF;
   margin-left:3px;
-}
-.douyin-card .douyin-label {
-  position:absolute; left:8px; right:8px; bottom:8px;
-  font-size:0.68rem; color:#FFF; text-align:center;
-  background:rgba(0,0,0,0.5); border-radius:6px;
-  padding:4px 6px; letter-spacing:0.02em;
 }
 
 /* Detail Image */
@@ -231,23 +226,24 @@ body {
   <div class="section-title">视频作品</div>
   <div class="douyin-grid">
     <a class="douyin-card" href="https://v.douyin.com/nN8yjfBge2Y/" target="_blank" rel="noopener">
-      <div class="douyin-cover"><div class="douyin-play"></div></div>
-      <span class="douyin-label">抖音作品 1</span>
+      <img src="images/douyin/7671187416505535782.jpeg" alt="抖音作品 1" loading="lazy">
+      <span class="douyin-play"></span>
     </a>
     <a class="douyin-card" href="https://v.douyin.com/q1gvnS6RWJo/" target="_blank" rel="noopener">
-      <div class="douyin-cover"><div class="douyin-play"></div></div>
-      <span class="douyin-label">抖音作品 2</span>
+      <img src="images/douyin/7671188832267554091.jpeg" alt="抖音作品 2" loading="lazy">
+      <span class="douyin-play"></span>
     </a>
     <a class="douyin-card" href="https://v.douyin.com/f9Ejkk104Lk/" target="_blank" rel="noopener">
-      <div class="douyin-cover"><div class="douyin-play"></div></div>
-      <span class="douyin-label">抖音作品 3</span>
+      <img src="images/douyin/7671190403311439113.jpeg" alt="抖音作品 3" loading="lazy">
+      <span class="douyin-play"></span>
     </a>
     <a class="douyin-card" href="https://v.douyin.com/kRaUSwK9EYs/" target="_blank" rel="noopener">
-      <div class="douyin-cover"><div class="douyin-play"></div></div>
-      <span class="douyin-label">抖音作品 4</span>
+      <img src="images/douyin/7671191446317305151.jpeg" alt="抖音作品 4" loading="lazy">
+      <span class="douyin-play"></span>
     </a>
   </div>
 </div>
+
 
 <!-- Detail -->
 <div class="section-block">
