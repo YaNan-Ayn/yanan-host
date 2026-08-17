@@ -153,6 +153,18 @@ body {
   border-radius:8px; background:#E8E8E8; display:block;
 }
 
+/* Detail Photos */
+.detail-photos {
+  display:grid; grid-template-columns:1fr; gap:10px;
+}
+@media (min-width: 480px) {
+  .detail-photos { grid-template-columns:1fr 1fr; }
+}
+.detail-photos .detail-img {
+  aspect-ratio:3/4;
+}
+
+
 /* Schedule */
 .schedule-row {
   display:flex; gap:10px; margin-bottom:10px;
@@ -280,7 +292,12 @@ body {
 <!-- Detail -->
 <div class="section-block">
   <div class="section-title">详细介绍</div>
-  <img class="detail-img" src="images/xiaonan.jpg" alt="主持现场">
+  <div class="detail-photos">
+  <img class="detail-img" src="images/members/xiaonan/photo-1.jpg" alt="晓楠 现场 1" loading="lazy">
+  <img class="detail-img" src="images/members/xiaonan/photo-2.jpg" alt="晓楠 现场 2" loading="lazy">
+  <img class="detail-img" src="images/members/xiaonan/photo-3.jpg" alt="晓楠 现场 3" loading="lazy">
+  <img class="detail-img" src="images/members/xiaonan/photo-4.jpg" alt="晓楠 现场 4" loading="lazy">
+  </div>
 </div>
 
 
