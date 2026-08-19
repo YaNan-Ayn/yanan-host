@@ -157,6 +157,22 @@ body {
   aspect-ratio:16/9;
 }
 
+/* Detail Lines */
+.detail-lines {
+  margin-bottom:16px; padding:2px 0;
+}
+.detail-lines .line {
+  position:relative; padding-left:18px; margin-bottom:10px;
+  font-size:0.95rem; font-weight:500; color:var(--text);
+  line-height:1.65;
+}
+.detail-lines .line:last-child { margin-bottom:0; }
+.detail-lines .line::before {
+  content:''; position:absolute; left:0; top:10px;
+  width:5px; height:5px; border-radius:50%; background:var(--accent);
+}
+
+
 
 /* Bottom Bar */
 .bottom-bar {
@@ -217,18 +233,17 @@ body {
 <div class="stats-card">
   <div class="stat-item">
     <div class="stat-label">身高</div>
-    <div class="stat-value">--<span class="stat-unit"></span></div>
+    <div class="stat-value">175<span class="stat-unit">cm</span></div>
   </div>
   <div class="stat-item">
     <div class="stat-label">体重</div>
-    <div class="stat-value">--<span class="stat-unit"></span></div>
+    <div class="stat-value">85<span class="stat-unit">kg</span></div>
   </div>
   <div class="stat-item">
     <div class="stat-label">从业</div>
-    <div class="stat-value">--<span class="stat-unit"></span></div>
+    <div class="stat-value">19<span class="stat-unit">年</span></div>
   </div>
 </div>
-
 <!-- Video Works -->
 <div class="section-block">
   <div class="section-title">视频作品</div>
@@ -256,6 +271,10 @@ body {
 <!-- Detail -->
 <div class="section-block">
   <div class="section-title">详细介绍</div>
+  <div class="detail-lines">
+    <div class="line">以真诚代替煽情</div>
+    <div class="line">用匠心承载每一场美好仪式</div>
+  </div>
   <div class="detail-photos">
   <img class="detail-img" src="images/members/atao/photo-1.jpg" alt="阿涛 现场 1" loading="lazy">
   <img class="detail-img" src="images/members/atao/photo-2.jpg" alt="阿涛 现场 2" loading="lazy">

@@ -157,6 +157,22 @@ body {
   aspect-ratio:16/9;
 }
 
+/* Detail Lines */
+.detail-lines {
+  margin-bottom:16px; padding:2px 0;
+}
+.detail-lines .line {
+  position:relative; padding-left:18px; margin-bottom:10px;
+  font-size:0.95rem; font-weight:500; color:var(--text);
+  line-height:1.65;
+}
+.detail-lines .line:last-child { margin-bottom:0; }
+.detail-lines .line::before {
+  content:''; position:absolute; left:0; top:10px;
+  width:5px; height:5px; border-radius:50%; background:var(--accent);
+}
+
+
 
 /* Bottom Bar */
 .bottom-bar {
@@ -217,18 +233,17 @@ body {
 <div class="stats-card">
   <div class="stat-item">
     <div class="stat-label">身高</div>
-    <div class="stat-value">--<span class="stat-unit"></span></div>
+    <div class="stat-value">178<span class="stat-unit">cm</span></div>
   </div>
   <div class="stat-item">
     <div class="stat-label">体重</div>
-    <div class="stat-value">--<span class="stat-unit"></span></div>
+    <div class="stat-value">70<span class="stat-unit">kg</span></div>
   </div>
   <div class="stat-item">
     <div class="stat-label">从业</div>
-    <div class="stat-value">--<span class="stat-unit"></span></div>
+    <div class="stat-value">3<span class="stat-unit">年</span></div>
   </div>
 </div>
-
 <!-- Video Works -->
 <div class="section-block">
   <div class="section-title">视频作品</div>
@@ -248,6 +263,13 @@ body {
 <!-- Detail -->
 <div class="section-block">
   <div class="section-title">详细介绍</div>
+  <div class="detail-lines">
+    <div class="line">专职婚礼宴会主持人</div>
+    <div class="line">擅长把控现场节奏，不煽情</div>
+    <div class="line">营造温馨自然的仪式氛围</div>
+    <div class="line">轻松愉快、真诚走心</div>
+    <div class="line">用平实的表达定格专属浪漫瞬间。</div>
+  </div>
   <div class="detail-photos">
   <img class="detail-img" src="images/members/haiming/photo-1.jpg" alt="海明 现场 1" loading="lazy">
   <img class="detail-img" src="images/members/haiming/photo-2.jpg" alt="海明 现场 2" loading="lazy">

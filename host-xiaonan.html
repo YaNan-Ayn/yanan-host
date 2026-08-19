@@ -162,6 +162,22 @@ body {
   aspect-ratio:16/9;
 }
 
+/* Detail Lines */
+.detail-lines {
+  margin-bottom:16px; padding:2px 0;
+}
+.detail-lines .line {
+  position:relative; padding-left:18px; margin-bottom:10px;
+  font-size:0.95rem; font-weight:500; color:var(--text);
+  line-height:1.65;
+}
+.detail-lines .line:last-child { margin-bottom:0; }
+.detail-lines .line::before {
+  content:''; position:absolute; left:0; top:10px;
+  width:5px; height:5px; border-radius:50%; background:var(--accent);
+}
+
+
 
 /* Schedule */
 .schedule-row {
@@ -246,19 +262,18 @@ body {
 <!-- Stats -->
 <div class="stats-card">
   <div class="stat-item">
-    <div class="stat-label">婚礼</div>
-    <div class="stat-value">300<span class="stat-unit">场+</span></div>
+    <div class="stat-label">身高</div>
+    <div class="stat-value">175<span class="stat-unit">cm</span></div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-label">体重</div>
+    <div class="stat-value">80<span class="stat-unit">kg</span></div>
   </div>
   <div class="stat-item">
     <div class="stat-label">从业</div>
-    <div class="stat-value">7<span class="stat-unit">年+</span></div>
-  </div>
-  <div class="stat-item">
-    <div class="stat-label">风格</div>
-    <div class="stat-value">温暖<span class="stat-unit">细腻</span></div>
+    <div class="stat-value">16<span class="stat-unit">年</span></div>
   </div>
 </div>
-
 <!-- Video Works -->
 <div class="section-block">
   <div class="section-title">视频作品</div>
@@ -290,6 +305,9 @@ body {
 <!-- Detail -->
 <div class="section-block">
   <div class="section-title">详细介绍</div>
+  <div class="detail-lines">
+    <div class="line">台风稳健、声音磁性、自然亲切</div>
+  </div>
   <div class="detail-photos">
   <img class="detail-img" src="images/members/xiaonan/photo-1.jpg" alt="晓楠 现场 1" loading="lazy">
   <img class="detail-img" src="images/members/xiaonan/photo-2.jpg" alt="晓楠 现场 2" loading="lazy">
