@@ -171,6 +171,16 @@ body {
   content:''; position:absolute; left:0; top:10px;
   width:5px; height:5px; border-radius:50%; background:var(--accent);
 }
+.detail-lines .line-brand {
+  padding-left:0; margin-bottom:14px;
+  font-size:1.05rem; font-weight:700; color:var(--accent-dark);
+  letter-spacing:0.04em;
+}
+.detail-lines .line-brand::before { display:none; }
+.detail-lines .line-meta {
+  font-size:0.9rem; color:var(--text-secondary);
+}
+.detail-lines .line-meta::before { background:#C9C9C9; }
 
 
 
@@ -280,6 +290,9 @@ body {
 <div class="section-block">
   <div class="section-title">详细介绍</div>
   <div class="detail-lines">
+    <div class="line line-brand">赢享先生主持品牌——小飞</div>
+    <div class="line line-meta">身高：179cm</div>
+    <div class="line line-meta">体重：80kg</div>
     <div class="line">用心发声·用爱归音·婚礼美学践行者</div>
     <div class="line">专注于一件事情，专注于一份职业</div>
     <div class="line">去感受每一场婚礼</div>
