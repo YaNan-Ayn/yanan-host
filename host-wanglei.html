@@ -157,20 +157,30 @@ body {
   aspect-ratio:16/9;
 }
 
-/* Detail Lines */
-.detail-lines {
-  margin-bottom:16px; padding:2px 0;
+/* Info Lines */
+.info-lines {
+  margin-top:2px; padding:2px 0;
 }
-.detail-lines .line {
+.info-lines .line {
   position:relative; padding-left:18px; margin-bottom:10px;
-  font-size:0.95rem; font-weight:500; color:var(--text);
+  font-size:0.95rem; font-weight:500; color:var(--text-secondary);
   line-height:1.65;
 }
-.detail-lines .line:last-child { margin-bottom:0; }
-.detail-lines .line::before {
+.info-lines .line:last-child { margin-bottom:0; }
+.info-lines .line::before {
   content:''; position:absolute; left:0; top:10px;
   width:5px; height:5px; border-radius:50%; background:var(--accent);
 }
+.info-lines .line-brand {
+  padding-left:0; margin-bottom:14px;
+  font-size:1.05rem; font-weight:700; color:var(--accent-dark);
+  letter-spacing:0.04em;
+}
+.info-lines .line-brand::before { display:none; }
+.info-lines .line-meta {
+  font-size:0.9rem; color:var(--text-secondary);
+}
+.info-lines .line-meta::before { background:#C9C9C9; }
 
 
 
@@ -226,7 +236,16 @@ body {
     <span class="info-name">王磊</span>
     <span class="info-tag">婚语平台成员</span>
   </div>
-  <div class="info-bio">因热爱与机缘，每次主持婚礼都能认识很多朋友。不做作、不煽情，像朋友像家人，让婚礼有温度。</div>
+  <div class="info-lines">
+    <div class="line line-brand">赢享先生主持品牌-王磊</div>
+    <div class="line line-meta">180cm 80kg</div>
+    <div class="line line-meta">从业8年</div>
+    <div class="line">因热爱和机缘每次主持婚礼都能认识很多朋友</div>
+    <div class="line">也是婚礼该有的样子</div>
+    <div class="line">不做作，不煽情</div>
+    <div class="line">像朋友，像家人</div>
+    <div class="line">且有温度</div>
+  </div>
 </div>
 
 <!-- Stats -->
@@ -267,13 +286,6 @@ body {
 <!-- Detail -->
 <div class="section-block">
   <div class="section-title">详细介绍</div>
-  <div class="detail-lines">
-    <div class="line">因热爱和机缘每次主持婚礼都能认识很多朋友</div>
-    <div class="line">也是婚礼该有的样子</div>
-    <div class="line">不做作，不煽情</div>
-    <div class="line">像朋友，像家人</div>
-    <div class="line">且有温度</div>
-  </div>
   <div class="detail-photos">
   <img class="detail-img" src="images/members/wanglei/photo-1.jpg" alt="王磊 现场 1" loading="lazy">
   </div>
