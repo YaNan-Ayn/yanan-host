@@ -159,21 +159,6 @@ body {
   aspect-ratio:16/9;
 }
 
-.detail-photo {
-  position:relative; aspect-ratio:16/9; overflow:hidden;
-  border-radius:12px; background:#111;
-}
-.detail-photo .detail-bg {
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; filter:blur(18px) brightness(0.8);
-  transform:scale(1.12);
-}
-.detail-photo .detail-img {
-  position:relative; width:100%; height:100%; aspect-ratio:auto;
-  object-fit:contain;
-}
-
-
 /* Schedule */
 .schedule-row {
   display:flex; gap:10px; margin-bottom:10px;
@@ -295,22 +280,10 @@ body {
   <div class="section-title">详细介绍</div>
   <div class="detail-photos">
   <img class="detail-img" src="images/members/yanan/photo-1.jpg" alt="亚楠 现场 1" loading="lazy">
-  <div class="detail-photo">
-  <img class="detail-bg" src="images/members/yanan/photo-2.jpg" alt="" aria-hidden="true" loading="lazy">
-  <img class="detail-img" src="images/members/yanan/photo-2.jpg" alt="亚楠 现场 2" loading="lazy">
-  </div>
-  <div class="detail-photo">
-  <img class="detail-bg" src="images/members/yanan/photo-3.jpg" alt="" aria-hidden="true" loading="lazy">
-  <img class="detail-img" src="images/members/yanan/photo-3.jpg" alt="亚楠 现场 3" loading="lazy">
-  </div>
-  <div class="detail-photo">
-  <img class="detail-bg" src="images/members/yanan/photo-4.jpg" alt="" aria-hidden="true" loading="lazy">
-  <img class="detail-img" src="images/members/yanan/photo-4.jpg" alt="亚楠 现场 4" loading="lazy">
-  </div>
-  <div class="detail-photo">
-  <img class="detail-bg" src="images/members/yanan/photo-5.jpg" alt="" aria-hidden="true" loading="lazy">
-  <img class="detail-img" src="images/members/yanan/photo-5.jpg" alt="亚楠 现场 5" loading="lazy">
-  </div>
+  <img class="detail-img" src="images/members/yanan/photo-2.jpg" alt="亚楠 现场 2" loading="lazy" style="object-position:center 28%">
+  <img class="detail-img" src="images/members/yanan/photo-3.jpg" alt="亚楠 现场 3" loading="lazy" style="object-position:center 18%">
+  <img class="detail-img" src="images/members/yanan/photo-4.jpg" alt="亚楠 现场 4" loading="lazy" style="object-position:center center">
+  <img class="detail-img" src="images/members/yanan/photo-5.jpg" alt="亚楠 现场 5" loading="lazy" style="object-position:center center">
   </div>
 </div>
 
