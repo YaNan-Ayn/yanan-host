@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>赢享先生 · 婚礼主持团队</title>
 <meta name="description" content="赢享先生婚礼主持团队——亚楠、郭莹等专业婚礼主持人，提供中式婚礼、西式婚礼、商务活动、婚礼管家全流程服务。温暖有温度的婚礼主持，让每场婚礼都有灵魂。">
-<meta property="og:title" content="赢享先生 · 婚礼主持团队">
-<meta property="og:description" content="让每场婚礼都有温度与灵魂。中式/西式/商务/管家全流程婚礼主持服务。">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/YaNan-Ayn/yanan-host@main/images/yanan.webp?v=1">
+<meta property="og:title" content="赢享先生品牌">
+<meta property="og:description" content="点击查看详情">
 <meta property="og:url" content="https://yanan-ayn.github.io/yanan-host/">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
@@ -671,8 +670,8 @@ body {
     </div>
     <div class="contact-info">
       <div class="contact-name">赢享先生婚礼主持团队</div>
-      <div class="contact-phone">电话：15639122828</div>
-      <div class="contact-wx">微信：15639122828</div>
+      <div class="contact-phone">电话：15517783090</div>
+      <div class="contact-wx">微信：15517783090</div>
       <div class="contact-addr">河南 · 焦作</div>
 
     </div>
@@ -697,7 +696,7 @@ function showToast(msg) {
 
 // WeChat
 function openWechat() {
-  const wxId = '15639122828';
+  const wxId = '15517783090';
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(wxId).then(() => {
       showToast('微信号已复制：' + wxId + '，即将跳转微信');
@@ -725,7 +724,7 @@ function fallbackCopy(text) {
 }
 
 function callPhone() {
-  window.location.href = 'tel:15639122828';
+  window.location.href = 'tel:15517783090';
 }
 
 function showLocation() {
@@ -736,6 +735,8 @@ function sharePage() {
   const url = window.location.href;
   const ua = navigator.userAgent.toLowerCase();
   const isWechat = ua.indexOf('micromessenger') !== -1;
+  const shareTitle = '赢享先生品牌';
+  const shareText = '点击查看详情';
 
   if (isWechat) {
     showToast('请点击右上角 ··· 按钮，选择「发送给朋友」或「分享到朋友圈」');
@@ -743,9 +744,16 @@ function sharePage() {
   }
 
   if (navigator.share) {
-    navigator.share({ title: '赢享先生婚礼主持团队', url: url }).catch(() => {
-      fallbackCopyUrl(url);
-    });
+    let shared = false;
+    const timer = setTimeout(() => {
+      if (!shared) fallbackCopyUrl(url);
+    }, 1200);
+    navigator.share({ title: shareTitle, text: shareText, url: url })
+      .then(() => { shared = true; clearTimeout(timer); })
+      .catch(() => {
+        clearTimeout(timer);
+        if (!shared) fallbackCopyUrl(url);
+      });
   } else {
     fallbackCopyUrl(url);
   }
